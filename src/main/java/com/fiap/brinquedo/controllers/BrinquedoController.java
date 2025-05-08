@@ -1,11 +1,12 @@
 package com.fiap.brinquedo.controllers;
 
 import com.fiap.brinquedo.entities.Brinquedo;
+import com.fiap.brinquedo.repositories.BrinquedoRepository;
+
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import com.fiap.brinquedo.repositories.BrinquedoRepository;
 
 import java.util.List;
 
@@ -17,7 +18,7 @@ public class BrinquedoController {
     private BrinquedoRepository repository;
 
     @PostMapping
-    public ResponseEntity<Brinquedo> criar(@RequestBody Brinquedo brinquedo) {
+    public ResponseEntity<Brinquedo> criar(@Valid @RequestBody Brinquedo brinquedo) {
         return ResponseEntity.ok(repository.save(brinquedo));
     }
 
@@ -41,5 +42,4 @@ public class BrinquedoController {
                 .toList();
         return ResponseEntity.ok(brinquedos);
     }
-
 }

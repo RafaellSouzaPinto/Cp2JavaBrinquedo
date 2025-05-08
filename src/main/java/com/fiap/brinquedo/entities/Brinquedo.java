@@ -1,6 +1,9 @@
 package com.fiap.brinquedo.entities;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Positive;
+import jakarta.validation.constraints.Size;
 
 @Entity
 @Table(name = "TDS_TB_Brinquedos")
@@ -9,10 +12,17 @@ public class Brinquedo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @NotBlank(message = "O nome é obrigatório")
+    @Size(min = 2, max = 100, message = "O nome deve ter entre 2 e 100 caracteres")
     private String nome;
+    @NotBlank(message = "O tipo é obrigatório")
     private String tipo;
+    @NotBlank(message = "A classificação é obrigatória")
     private String classificacao;
+    @NotBlank(message = "O tamanho é obrigatório")
     private String tamanho;
+    @Positive(message = "O preço deve ser maior que zero")
     private double preco;
 
     public Brinquedo() {
