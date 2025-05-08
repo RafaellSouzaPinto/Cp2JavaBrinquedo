@@ -174,4 +174,5 @@ public class BrinquedoController {
    ```bash
    git clone https://github.com/RafaellSouzaPinto/Cp2JavaBrinquedo.git
 2. Importe o projeto em uma IDE. (IntelliJ ou NetBeans)
-3. Execute a classe principal para dar inicio ao programa.
+3. Coloque o seu username e senha da oracle
+4. Execute a classe principal para dar inicio ao programa.
