@@ -1,65 +1,81 @@
-# Sistema de Cadastro de Brinquedos
+# 🎮 Sistema de Cadastro de Brinquedos
 
-# 🧑‍💻Integrantes do grupo: 
-- Gustavo Monção / RM557515
-- Rafael de Souza Pinto / RM555130
+## 👥 Integrantes do Grupo
+- Gustavo Monção – RM557515  
+- Rafael de Souza Pinto – RM555130  
 
-# 🖥️ Tecnologias utilizadas: 
-- Java
-- Orientação a Objetos (OOP)
+---
 
-# 🔍 Funcionalidades
+## 💻 Tecnologias Utilizadas
+- Java  
+- Programação Orientada a Objetos (POO)  
+- Spring Boot (para API REST)  
 
-O sitema permite:
-- Cadastro de brinquedos com nome, faixa etária e preço;
-- Listagem de todos os brinquedos cadastrados;
-- Cálculo automático do valor total dos brinquedos;
-- Validação simples de entrada;
-- Exclusão de brinquedos por ID;
+---
 
-# 🗂️ Estrutura do projeto
+## ✅ Funcionalidades
+O sistema permite:
+- ✅ Cadastro de brinquedos com nome, tipo, faixa etária, tamanho e preço  
+- ✅ Listagem de todos os brinquedos cadastrados  
+- ✅ Busca de brinquedos por ID e por tipo  
+- ✅ Cálculo automático do valor total dos brinquedos  
+- ✅ Validação simples de entradas  
+- ✅ Exclusão de brinquedos por ID  
 
-Cp2JavaBrinquedo
-  src/
-    brinquedo/
-      Brinquedo.java
-      Principal.java
-README.md
+---
 
-# `Brinquedo.java`
-Classe responsável por representar um brinquedo, com atributos como:
+## 📁 Estrutura do Projeto
 
-- Nome;
-- Faixa etária;
-- Preço;
+Cp2JavaBrinquedo/
+│
+├── src/
+│ └── brinquedo/
+│ ├── Brinquedo.java
+│ └── Principal.java
+│
+├── BrinquedoController.java
+├── BrinquedoRepository.java
+├── Application.java
+└── README.md
 
-Inclui métodos para obter e modificar estes dados, além de validações.
+## 🧸 `Brinquedo.java`
 
-# `Principal.java`
-Classe principal que executa o programa. Utiliza um 'Scanner' para o usuário interagir e o mesmo permite cadastrar brinquedos rapidamente.
+Classe responsável por representar um brinquedo, contendo os seguintes atributos:
 
-# 🔍 Exemplos de Requisições no Postman
+- `id` (gerado automaticamente)
+- `nome`
+- `tipo`
+- `classificacao` (faixa etária)
+- `tamanho`
+- `preco`
 
-- ▶️ POST
-  - Descrição: Cadastra um novo brinquedo.
+
+## 📡 API REST - Exemplos de Requisições (Postman)
+
+### ▶️ POST /brinquedos  
+**Descrição:** Cadastra um novo brinquedo  
+**Corpo da requisição:**
 ```json
 {
-  "nome": "Carrinho Hot Wheels",
-  "faixaEtaria": "3+",
-  "preco": 25.90
+  "nome": "Carrinho de Controle Remoto",
+  "tipo": "Eletrônico",
+  "classificacao": "6+",
+  "tamanho": "Médio",
+  "preco": 149.90
 }
-```
 Resposta esperada:
 ```json
 {
-  "id": 1,
-  "nome": "Carrinho Hot Wheels",
-  "faixaEtaria": "3+",
-  "preco": 25.9
+    "id": 23,
+    "nome": "Carrinho de Controle Remoto",
+    "tipo": "Eletrônico",
+    "classificacao": "6+",
+    "tamanho": "Médio",
+    "preco": 149.9
 }
 ```
 - ▶️ GET
-  - Descrição: Lista todos os brinquedos cadastrados.
+  - Descrição: Lista todos os brinquedos cadastrados
 
 Resposta esperada:
 ```json
@@ -67,48 +83,92 @@ Resposta esperada:
   {
     "id": 1,
     "nome": "Carrinho Hot Wheels",
-    "faixaEtaria": "3+",
+    "tipo": "Miniatura",
+    "classificacao": "3+",
+    "tamanho": "Pequeno",
     "preco": 25.9
   },
   {
     "id": 2,
     "nome": "Boneca Barbie",
-    "faixaEtaria": "5+",
+    "tipo": "Boneca",
+    "classificacao": "5+",
+    "tamanho": "Médio",
     "preco": 89.99
   }
 ]
 ```
--  ▶️ DELETE
-  - Descrição: Remove o brinquedo com o ID especificado.
+-  ▶️ Buscar por Id
+  - Descrição: Busca o Id especifico.
 ```bash
-DELETE /api/brinquedos/1
+GET http://localhost:8080/brinquedos/2
+```
+Resposta esperada:
+```json
+{
+    "id": 2,
+    "nome": "Boneca Barbie",
+    "tipo": "Boneca",
+    "classificacao": "5+",
+    "tamanho": "Médio",
+    "preco": 89.99
+}
+```
+-  ▶️ Buscar por Tipo
+  - Descrição: Busca por tipo
+GET http://localhost:8080/brinquedos/tipo/Boneca
+Resposta esperada:
+```json
+[
+    {
+        "id": 24,
+        "nome": "Carrinho Hot Wheels",
+        "tipo": "Miniatura",
+        "classificacao": "3+",
+        "tamanho": "Pequeno",
+        "preco": 25.9
+    }
+]
 ```
 
 # Estrutura das Controllers
 BrinquedoController.java
 ```java
 @RestController
-@RequestMapping("/api/brinquedos")
+@RequestMapping("/brinquedos")
 public class BrinquedoController {
 
     @Autowired
-    private BrinquedoService service;
-
-    @GetMapping
-    public List<Brinquedo> listarTodos() {
-        return service.listar();
-    }
+    private BrinquedoRepository repository;
 
     @PostMapping
-    public Brin(@RequestBody Brinquedo brinquedo) {
-        return service.salvar(brinquedo);
+    public ResponseEntity<Brinquedo> criar(@RequestBody Brinquedo brinquedo) {
+        return ResponseEntity.ok(repository.save(brinquedo));
     }
 
-    @DeleteMapping("/{id}")
-    public void deletar(@PathVariable Long id) {
-        service.deletar(id);
+    @GetMapping
+    public ResponseEntity<List<Brinquedo>> listarTodos() {
+        return ResponseEntity.ok(repository.findAll());
     }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Brinquedo> buscarPorId(@PathVariable Long id) {
+        return repository.findById(id)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
+    }
+
+    @GetMapping("/tipo/{tipo}")
+    public ResponseEntity<List<Brinquedo>> buscarPorTipo(@PathVariable String tipo) {
+        List<Brinquedo> brinquedos = repository.findAll()
+                .stream()
+                .filter(brinquedo -> brinquedo.getTipo() != null && brinquedo.getTipo().equalsIgnoreCase(tipo))
+                .toList();
+        return ResponseEntity.ok(brinquedos);
+    }
+
 }
+
 ```
 
 # ▶️ Como executar o código? 
