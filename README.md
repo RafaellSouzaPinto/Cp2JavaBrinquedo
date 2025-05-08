@@ -63,7 +63,9 @@ Classe responsável por representar um brinquedo, contendo os seguintes atributo
   "tamanho": "Médio",
   "preco": 149.90
 }
+```
 Resposta esperada:
+```json
 {
     "id": 23,
     "nome": "Carrinho de Controle Remoto",
