@@ -117,7 +117,7 @@ Resposta esperada:
 ```
 -  ▶️ Buscar por Tipo
   - Descrição: Busca por tipo
-GET http://localhost:8080/brinquedos/tipo/Boneca
+GET http://localhost:8080/brinquedos/tipo/Miniatura
 Resposta esperada:
 ```json
 [
