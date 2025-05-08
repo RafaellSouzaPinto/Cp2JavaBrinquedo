@@ -1,8 +1,9 @@
 # 🎮 Sistema de Cadastro de Brinquedos
 
 ## 👥 Integrantes do Grupo
+- Rafael de Souza Pinto – RM555130
 - Gustavo Monção – RM557515  
-- Rafael de Souza Pinto – RM555130  
+- Gustavo Bispo Cordeiro - RM558515
 
 ---
 
