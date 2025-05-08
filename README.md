@@ -19,7 +19,6 @@ O sistema permite:
 - ✅ Listagem de todos os brinquedos cadastrados  
 - ✅ Busca de brinquedos por ID e por tipo  
 - ✅ Cálculo automático do valor total dos brinquedos  
-- ✅ Validação simples de entradas  
 - ✅ Exclusão de brinquedos por ID  
 
 ---
