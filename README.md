@@ -18,9 +18,6 @@ O sistema permite:
 - ✅ Cadastro de brinquedos com nome, tipo, faixa etária, tamanho e preço  
 - ✅ Listagem de todos os brinquedos cadastrados  
 - ✅ Busca de brinquedos por ID e por tipo  
-- ✅ Cálculo automático do valor total dos brinquedos  
-- ✅ Validação simples de entradas  
-- ✅ Exclusão de brinquedos por ID  
 
 ---
 
