@@ -35,10 +35,11 @@ public class BrinquedoController {
 
     @GetMapping("/tipo/{tipo}")
     public ResponseEntity<List<Brinquedo>> buscarPorTipo(@PathVariable String tipo) {
-        return ResponseEntity.ok(
-                repository.findAll().stream()
-                        .filter(b -> b.getTipo().equalsIgnoreCase(tipo))
-                        .toList()
-        );
+        List<Brinquedo> brinquedos = repository.findAll()
+                .stream()
+                .filter(brinquedo -> brinquedo.getTipo() != null && brinquedo.getTipo().equalsIgnoreCase(tipo))
+                .toList();
+        return ResponseEntity.ok(brinquedos);
     }
+
 }
